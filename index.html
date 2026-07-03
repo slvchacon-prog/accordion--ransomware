@@ -292,4 +292,119 @@
   <div class="wrapper">
     <header>
       <h1>Anatomy of a Ransomware Attack</h1>
-      <p class="subtitle">Ransomware is a chain of silent, calculated events. Click through the panels below to discover how a
+      <p class="subtitle">Ransomware is a chain of silent, calculated events. Click through the panels below to discover how a single oversight can freeze an entire corporation's operations.</p>
+    </header>
+
+    <div class="horizontal-accordion">
+      
+      <div class="panel">
+        <div class="panel-strip">
+          <span class="panel-num">01</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/JmEIbRz.png" alt="Infiltration Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Infiltration</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text-column">
+            <h2 class="panel-title">Infiltration (The Trojan Horse)</h2>
+            <p class="panel-text">It always starts with something harmless. A finance employee receives an email that looks exactly like a legitimate vendor demanding payment for an overdue invoice. The email contains an attachment named Invoice_March.pdf.exe. When clicked, nothing visibly opens, but in the background, the company’s digital gates have just been thrown wide open.</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> The human factor is the first line of defense. Over 90% of cyberattacks begin with a single phishing email.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/ruKojo5.png" alt="Infiltration Scenario Graphic">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-strip">
+          <span class="panel-num">02</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/u2aSdsW.png" alt="Exploration Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Exploration</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text-column">
+            <h2 class="panel-title">Exploration (The Silent Enemy)</h2>
+            <p class="panel-text">Contrary to Hollywood movies, chaos isn’t immediate. The malware spends days or even weeks silently walking through the company’s internal network. Its goal is to map the entire infrastructure. It locates the main servers, hunts for sensitive customer data, and finds where the backups are stored so it can destroy them first.</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> Attackers prefer stealth over speed. By the time you notice they are there, they already know your network better than you do.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/b1NKw1N.png" alt="Exploration Network Mapped Graphic">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-strip">
+          <span class="panel-num">03</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/g4ZnB0d.png" alt="Encryption Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Encryption</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text-column">
+            <h2 class="panel-title">Encryption (The Digital Lock)</h2>
+            <p class="panel-text">Once the backups are wiped out, the trap is sprung. This usually happens at 2:00 AM on a Sunday when the IT office is completely empty. The malware begins to encrypt every database, spreadsheet, source code, and operating system under a complex mathematical key. Within minutes, entire servers become completely useless bricks.</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> Modern encryption is mathematically irreversible. Without the attacker's private key, recovering the data is technically impossible.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/u1waXVJ.jpeg" alt="Encryption Servers Locked Graphic">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-strip">
+          <span class="panel-num">04</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/QNMEB9s.png" alt="Extortion Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Extortion</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text-column">
+            <h2 class="panel-title">Extortion (The Ransom Note)</h2>
+            <p class="panel-text">On Monday morning, employees power on their computers only to be greeted by a bright red screen. A text file reads: "Your files are encrypted. If you want them back, you have 72 hours to transfer $50,000 in Bitcoin. If you contact law enforcement or try to crack the code, we will delete everything and leak your data on the dark web."</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> Paying never guarantees you will get your data back. Prevention, monitoring, and offline backups are the only real cure.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/eo8vfZe.png" alt="Extortion Ransom Note Graphic">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+
+    panels.forEach(panel => {
+      panel.addEventListener('click', () => {
+        panels.forEach(p => p.classList.remove('active'));
+        panel.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
