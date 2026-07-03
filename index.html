@@ -15,64 +15,396 @@
       --accent-glow: rgba(239, 68, 68, 0.15);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow-x: hidden; }
-    .wrapper { width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 20px; }
-    header { text-align: center; margin-bottom: 10px; }
-    h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
-    .subtitle { color: var(--text-muted); font-size: 0.95rem; max-width: 700px; margin: 0 auto; line-height: 1.5; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .horizontal-accordion { display: flex; width: 100%; height: 540px; gap: 12px; overflow: hidden; }
-    .panel { flex: 1; background-color: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; cursor: pointer; overflow: hidden; display: flex; position: relative; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease; }
-    .panel:hover:not(.active) { background-color: #273549; border-color: rgba(255, 255, 255, 0.1); }
-    .panel.active { flex: 6; background-color: var(--card-active); border-color: var(--accent-red); box-shadow: 0 10px 30px var(--accent-glow); cursor: default; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
 
-    .panel-strip { width: 75px; min-width: 75px; height: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px 0; user-select: none; position: relative; }
-    .panel-num { font-size: 1.2rem; font-weight: 700; color: var(--text-muted); transition: color 0.3s ease; margin-bottom: 40px; }
-    .panel.active .panel-num { color: var(--accent-red); }
-    .panel-mini-icon-container { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-bottom: auto; }
-    .panel-mini-icon-container img { width: 100%; height: 100%; object-fit: contain; }
-    
-    .panel-label-container { position: absolute; bottom: 50px; width: 250px; height: 30px; display: flex; align-items: center; justify-content: flex-start; transform: rotate(-90deg); transform-origin: left center; left: 50px; }
-    .panel-label { font-size: 1.1rem; font-weight: 600; color: var(--text-main); letter-spacing: 0.05em; transition: opacity 0.2s ease; white-space: nowrap; }
-    .panel.active .panel-label { opacity: 0; }
+    .wrapper {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-    .panel-body { flex: 1; padding: 40px; opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease, transform 0.3s ease; display: flex; gap: 30px; align-items: center; visibility: hidden; }
-    .panel.active .panel-body { opacity: 1; transform: translateX(0); visibility: visible; transition-delay: 0.2s; }
-    .panel-text-column { flex: 1.2; display: flex; flex-direction: column; gap: 16px; }
-    .panel-title { font-size: 1.6rem; font-weight: 700; color: var(--text-main); }
-    .panel-text { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
-    .takeaway-box { background-color: rgba(239, 68, 68, 0.06); border-left: 4px solid var(--accent-red); padding: 14px 18px; border-radius: 0 8px 8px 0; }
-    .takeaway-box p { color: #fca5a5; font-size: 0.9rem; font-weight: 500; line-height: 1.5; }
+    header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-    /* Ajuste para que NO se corten las imágenes */
-    .panel-main-image-container { flex: 1; height: 380px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); background-color: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; padding: 10px; }
-    .panel-main-image-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
 
-    @media (max-width: 900px) { .panel-body { flex-direction: column; overflow-y: auto; } .panel-main-image-container { width: 100%; flex: none; } }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .horizontal-accordion {
+      display: flex;
+      width: 100%;
+      height: 540px; 
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .panel {
+      flex: 1;
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+      transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .panel:hover:not(.active) {
+      background-color: #273549;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .panel.active {
+      flex: 6; 
+      background-color: var(--card-active);
+      border-color: var(--accent-red);
+      box-shadow: 0 10px 30px var(--accent-glow);
+      cursor: default;
+    }
+
+    .panel-strip {
+      width: 75px;
+      min-width: 75px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 0;
+      user-select: none;
+      position: relative;
+    }
+
+    .panel-num {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+      margin-bottom: 40px;
+    }
+
+    .panel.active .panel-num {
+      color: var(--accent-red);
+    }
+
+    .panel-mini-icon-container {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: auto; 
+    }
+
+    .panel-mini-icon-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .panel-label-container {
+      position: absolute;
+      bottom: 50px;
+      width: 250px; 
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transform: rotate(-90deg);
+      transform-origin: left center;
+      left: 50px;
+    }
+
+    .panel-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .panel.active .panel-label {
+      opacity: 0; 
+    }
+
+    .panel-body {
+      flex: 1;
+      padding: 40px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      gap: 30px; 
+      align-items: center;
+      visibility: hidden;
+    }
+
+    .panel.active .panel-body {
+      opacity: 1;
+      transform: translateX(0);
+      visibility: visible;
+      transition-delay: 0.2s;
+    }
+
+    .panel-text-column {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .panel-text {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .takeaway-box {
+      background-color: rgba(239, 68, 68, 0.06);
+      border-left: 4px solid var(--accent-red);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .takeaway-box p {
+      color: #fca5a5;
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .panel-main-image-container {
+      flex: 1;
+      height: 100%;
+      max-height: 390px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.01);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .panel-main-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; 
+    }
+
+    @media (max-width: 900px) {
+      .panel-body {
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 30px 24px;
+      }
+      .panel-main-image-container {
+        width: 100%;
+        min-height: 200px;
+        flex: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .horizontal-accordion {
+        flex-direction: column;
+        height: auto;
+      }
+      .panel {
+        flex-direction: column;
+        height: 80px;
+        min-height: 80px;
+      }
+      .panel.active {
+        flex: none;
+        height: auto;
+      }
+      .panel-strip {
+        flex-direction: row;
+        width: 100%;
+        height: 80px;
+        padding: 0 24px;
+      }
+      .panel-num {
+        margin-bottom: 0;
+      }
+      .panel-mini-icon-container {
+        margin-bottom: 0;
+        margin-left: 20px;
+      }
+      .panel-label-container {
+        position: relative;
+        transform: none;
+        bottom: auto;
+        left: auto;
+        width: auto;
+        height: auto;
+        margin-left: auto;
+      }
+      .panel-label {
+        opacity: 1 !important;
+      }
+    }
   </style>
 </head>
 <body>
+
   <div class="wrapper">
     <header>
       <h1>Anatomy of a Ransomware Attack</h1>
-      <p class="subtitle">Ransomware is a chain of silent, calculated events.</p>
+      <p class="subtitle">Ransomware is a chain of silent, calculated events. Click through the panels below to discover how a single oversight can freeze an entire corporation's operations.</p>
     </header>
 
     <div class="horizontal-accordion">
-      <div class="panel active">
-        <div class="panel-strip"><span class="panel-num">01</span><div class="panel-mini-icon-container"><img src="https://i.imgur.com/JmEIbRz.png"></div><div class="panel-label-container"><span class="panel-label">Infiltration</span></div></div>
+      
+      <div class="panel">
+        <div class="panel-strip">
+          <span class="panel-num">01</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/JmEIbRz.png" alt="Infiltration Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Infiltration</span>
+          </div>
+        </div>
         <div class="panel-body">
-          <div class="panel-text-column"><h2 class="panel-title">Infiltration (The Trojan Horse)</h2><p class="panel-text">It always starts with something harmless. A finance employee receives an email... The email contains an attachment named Invoice_March.pdf.exe.</p><div class="takeaway-box"><p><strong>Key Takeaway:</strong> The human factor is the first line of defense.</p></div></div>
-          <div class="panel-main-image-container"><img src="https://i.imgur.com/ruKojo5.png"></div>
+          <div class="panel-text-column">
+            <h2 class="panel-title">Infiltration (The Trojan Horse)</h2>
+            <p class="panel-text">It always starts with something harmless. For example, a finance employee receives an email that looks exactly like a legitimate vendor demanding payment for an overdue invoice. The email contains an attachment named Invoice_March.pdf.exe. When clicked, nothing visibly opens, but in the background, the company’s digital gates have just been thrown wide open.</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> The human factor is the first line of defense. Over 90% of cyberattacks begin with a single phishing email.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/ruKojo5.png" alt="Infiltration Scenario Graphic">
+          </div>
         </div>
       </div>
+
       <div class="panel">
-        <div class="panel-strip"><span class="panel-num">02</span><div class="panel-mini-icon-container"><img src="https://i.imgur.com/u2aSdsW.png"></div><div class="panel-label-container"><span class="panel-label">Exploration</span></div></div>
+        <div class="panel-strip">
+          <span class="panel-num">02</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/u2aSdsW.png" alt="Exploration Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Exploration</span>
+          </div>
+        </div>
         <div class="panel-body">
-          <div class="panel-text-column"><h2 class="panel-title">Exploration (The Silent Enemy)</h2><p class="panel-text">The malware spends days or even weeks silently walking through the network to map the infrastructure.</p><div class="takeaway-box"><p><strong>Key Takeaway:</strong> Attackers prefer stealth over speed.</p></div></div>
-          <div class="panel-main-image-container"><img src="https://i.imgur.com/b1NKw1N.png"></div>
+          <div class="panel-text-column">
+            <h2 class="panel-title">Exploration (The Silent Enemy)</h2>
+            <p class="panel-text">Contrary to Hollywood movies, chaos isn’t immediate. The malware spends days or even weeks silently walking through the company’s internal network. Its goal is to map the entire infrastructure. It locates the main servers, hunts for sensitive customer data, and finds where the backups are stored so it can destroy them first.</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> Attackers prefer stealth over speed. By the time you notice they are there, they already know your network better than you do.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/b1NKw1N.png" alt="Exploration Network Mapped Graphic">
+          </div>
         </div>
       </div>
+
       <div class="panel">
-        <div class="panel-strip"><span class
+        <div class="panel-strip">
+          <span class="panel-num">03</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/g4ZnB0d.png" alt="Encryption Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Encryption</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text-column">
+            <h2 class="panel-title">Encryption (The Digital Lock)</h2>
+            <p class="panel-text">Once the backups are wiped out, the trap is sprung. The malware begins to encrypt every database, spreadsheet, source code, and operating system under a complex mathematical key. Within minutes, entire servers become completely useless bricks.</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> Modern encryption is mathematically irreversible. Without the attacker's private key, recovering the data is technically impossible.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/u1waXVJ.jpeg" alt="Encryption Servers Locked Graphic">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-strip">
+          <span class="panel-num">04</span>
+          <div class="panel-mini-icon-container">
+            <img src="https://i.imgur.com/QNMEB9s.png" alt="Extortion Icon">
+          </div>
+          <div class="panel-label-container">
+            <span class="panel-label">Extortion</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text-column">
+            <h2 class="panel-title">Extortion (The Ransom Note)</h2>
+            <p class="panel-text">The next time employees power on their computers they are greeted by a bright red screen. A text file reads: "Your files are encrypted. If you want them back, you have 72 hours to transfer $50,000 in Bitcoin. If you contact law enforcement or try to crack the code, we will delete everything and leak your data on the dark web."</p>
+            <div class="takeaway-box">
+              <p><strong>Key Takeaway:</strong> Paying never guarantees you will get your data back. Prevention, monitoring, and offline backups are the only real cure.</p>
+            </div>
+          </div>
+          <div class="panel-main-image-container">
+            <img src="https://i.imgur.com/eo8vfZe.png" alt="Extortion Ransom Note Graphic">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+
+    panels.forEach(panel => {
+      panel.addEventListener('click', () => {
+        panels.forEach(p => p.classList.remove('active'));
+        panel.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
