@@ -16,87 +16,43 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow-x: hidden; }
     .wrapper { width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 20px; }
-
     header { text-align: center; margin-bottom: 10px; }
-    h1 { font-size: 1.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
-    .subtitle { color: var(--text-muted); font-size: 0.95rem; max-width: 700px; margin: 0 auto; }
+    h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+    .subtitle { color: var(--text-muted); font-size: 0.95rem; max-width: 700px; margin: 0 auto; line-height: 1.5; }
 
     .horizontal-accordion { display: flex; width: 100%; height: 540px; gap: 12px; overflow: hidden; }
+    .panel { flex: 1; background-color: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; cursor: pointer; overflow: hidden; display: flex; position: relative; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease; }
+    .panel:hover:not(.active) { background-color: #273549; border-color: rgba(255, 255, 255, 0.1); }
+    .panel.active { flex: 6; background-color: var(--card-active); border-color: var(--accent-red); box-shadow: 0 10px 30px var(--accent-glow); cursor: default; }
 
-    .panel {
-      flex: 1;
-      background-color: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      position: relative;
-      transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .panel.active { flex: 6; background-color: var(--card-active); border-color: var(--accent-red); cursor: default; }
-
-    .panel-strip {
-      width: 75px; min-width: 75px; height: 100%;
-      display: flex; flex-direction: column; align-items: center; padding: 30px 0;
-    }
-
-    .panel-num { font-size: 1.2rem; font-weight: 700; color: var(--text-muted); margin-bottom: 40px; }
+    .panel-strip { width: 75px; min-width: 75px; height: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px 0; user-select: none; position: relative; }
+    .panel-num { font-size: 1.2rem; font-weight: 700; color: var(--text-muted); transition: color 0.3s ease; margin-bottom: 40px; }
     .panel.active .panel-num { color: var(--accent-red); }
-
-    .panel-label-container {
-      position: absolute; bottom: 50px;
-      transform: rotate(-90deg); transform-origin: left center; left: 50px;
-    }
-    .panel-label { font-size: 1.1rem; font-weight: 600; white-space: nowrap; }
+    .panel-mini-icon-container { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-bottom: auto; }
+    .panel-mini-icon-container img { width: 100%; height: 100%; object-fit: contain; }
+    
+    .panel-label-container { position: absolute; bottom: 50px; width: 250px; height: 30px; display: flex; align-items: center; justify-content: flex-start; transform: rotate(-90deg); transform-origin: left center; left: 50px; }
+    .panel-label { font-size: 1.1rem; font-weight: 600; color: var(--text-main); letter-spacing: 0.05em; transition: opacity 0.2s ease; white-space: nowrap; }
     .panel.active .panel-label { opacity: 0; }
 
-    .panel-body {
-      flex: 1; padding: 40px; opacity: 0;
-      transition: opacity 0.3s ease; display: flex; gap: 30px; align-items: center; visibility: hidden;
-    }
-    .panel.active .panel-body { opacity: 1; visibility: visible; transition-delay: 0.2s; }
+    .panel-body { flex: 1; padding: 40px; opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease, transform 0.3s ease; display: flex; gap: 30px; align-items: center; visibility: hidden; }
+    .panel.active .panel-body { opacity: 1; transform: translateX(0); visibility: visible; transition-delay: 0.2s; }
+    .panel-text-column { flex: 1.2; display: flex; flex-direction: column; gap: 16px; }
+    .panel-title { font-size: 1.6rem; font-weight: 700; color: var(--text-main); }
+    .panel-text { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+    .takeaway-box { background-color: rgba(239, 68, 68, 0.06); border-left: 4px solid var(--accent-red); padding: 14px 18px; border-radius: 0 8px 8px 0; }
+    .takeaway-box p { color: #fca5a5; font-size: 0.9rem; font-weight: 500; line-height: 1.5; }
 
-    .panel-text-column { flex: 1; display: flex; flex-direction: column; gap: 16px; }
-    
-    /* ESTILO CORREGIDO PARA IMÁGENES */
-    .panel-main-image-container {
-      flex: 1;
-      height: 350px; /* Altura fija uniforme */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      background-color: transparent;
-      padding: 10px;
-    }
+    /* Ajuste para que NO se corten las imágenes */
+    .panel-main-image-container { flex: 1; height: 380px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); background-color: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; padding: 10px; }
+    .panel-main-image-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-    .panel-main-image-container img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain; /* Muestra toda la imagen sin cortar */
-    }
-
-    .takeaway-box { background-color: rgba(239, 68, 68, 0.06); border-left: 4px solid var(--accent-red); padding: 14px; }
+    @media (max-width: 900px) { .panel-body { flex-direction: column; overflow-y: auto; } .panel-main-image-container { width: 100%; flex: none; } }
   </style>
 </head>
 <body>
-
   <div class="wrapper">
     <header>
       <h1>Anatomy of a Ransomware Attack</h1>
@@ -105,33 +61,18 @@
 
     <div class="horizontal-accordion">
       <div class="panel active">
-        <div class="panel-strip">
-          <span class="panel-num">01</span>
-          <div class="panel-label-container"><span class="panel-label">Infiltration</span></div>
-        </div>
+        <div class="panel-strip"><span class="panel-num">01</span><div class="panel-mini-icon-container"><img src="https://i.imgur.com/JmEIbRz.png"></div><div class="panel-label-container"><span class="panel-label">Infiltration</span></div></div>
         <div class="panel-body">
-          <div class="panel-text-column">
-            <h2>Infiltration</h2>
-            <p>It starts with a harmless email...</p>
-            <div class="takeaway-box"><strong>Key Takeaway:</strong> Phishing is the primary entry point.</div>
-          </div>
-          <div class="panel-main-image-container">
-            <img src="https://i.imgur.com/ruKojo5.png" alt="Infiltration">
-          </div>
+          <div class="panel-text-column"><h2 class="panel-title">Infiltration (The Trojan Horse)</h2><p class="panel-text">It always starts with something harmless. A finance employee receives an email... The email contains an attachment named Invoice_March.pdf.exe.</p><div class="takeaway-box"><p><strong>Key Takeaway:</strong> The human factor is the first line of defense.</p></div></div>
+          <div class="panel-main-image-container"><img src="https://i.imgur.com/ruKojo5.png"></div>
         </div>
       </div>
-
+      <div class="panel">
+        <div class="panel-strip"><span class="panel-num">02</span><div class="panel-mini-icon-container"><img src="https://i.imgur.com/u2aSdsW.png"></div><div class="panel-label-container"><span class="panel-label">Exploration</span></div></div>
+        <div class="panel-body">
+          <div class="panel-text-column"><h2 class="panel-title">Exploration (The Silent Enemy)</h2><p class="panel-text">The malware spends days or even weeks silently walking through the network to map the infrastructure.</p><div class="takeaway-box"><p><strong>Key Takeaway:</strong> Attackers prefer stealth over speed.</p></div></div>
+          <div class="panel-main-image-container"><img src="https://i.imgur.com/b1NKw1N.png"></div>
+        </div>
       </div>
-  </div>
-
-  <script>
-    const panels = document.querySelectorAll('.panel');
-    panels.forEach(panel => {
-      panel.addEventListener('click', () => {
-        panels.forEach(p => p.classList.remove('active'));
-        panel.classList.add('active');
-      });
-    });
-  </script>
-</body>
-</html>
+      <div class="panel">
+        <div class="panel-strip"><span class
